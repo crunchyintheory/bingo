@@ -1,0 +1,222 @@
+<html lang="en">
+    <head>
+        <title>Bingo</title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+        <style type="text/css">
+        body {
+                background: #eee;
+                color: #444;
+            }
+
+            h1 {
+                text-align: center;
+                font-size: 4rem;
+            }
+
+            @media(max-width: 576px) {
+                h1 {
+                    font-size: 11vw;
+                }
+            }
+
+            a, .weak {
+                color: #666;
+            }
+
+            a:hover {
+                color: #000;
+                text-decoration: none;
+            }
+
+            a i {
+                transition: transform 0.1s;
+                vertical-align: baseline;
+            }
+
+            a:hover i.rotate {
+                transform: rotate(40deg);
+            }
+
+            .hidden {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            #url > h4 > a {
+                margin: 0 15px;
+            }
+
+            .footer i {
+                vertical-align: middle;
+            }
+
+            .header-background {
+                width: 100%;
+                height: 100%;
+                opacity: 0.75;
+                overflow: auto;
+            }
+
+            #site-link {
+                transition: margin 0.4s, padding 0.4s;
+            }
+
+            @media (min-width: 576px) {
+                #site-link:hover {
+                    padding-top: 3rem!important;
+                    margin-bottom: -2rem!important;
+                }
+            }
+            table {
+                border-spacing: 0;
+                text-align: center;
+                width: 1000px;
+                table-layout: fixed;
+                background: #fff;
+            }
+            thead {
+                font-weight: 700;
+                font-size: 2em;
+            }
+            tbody {
+                font-size: 1.5em;
+            }
+            td {
+                border: 1px solid black;
+                padding: 10px;
+            }
+            tbody td {
+                height: 200px;
+                cursor: pointer;
+            }
+            strong {
+                color: limegreen;
+                display: block;
+                margin: 5px;
+            }
+            strong:first-child {
+                border-bottom: 1px solid limegreen;
+                padding-bottom: 2px;
+            }
+            strong:last-child {
+                border-top: 1px solid limegreen;
+                padding-top: 2px;
+            }
+            td.done {
+                color: #fff;
+                font-weight: 700;
+                background: firebrick;
+            }
+            table + span, table + span a {
+                color: darkgray !important;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid d-flex flex-column pb-3">
+            <div class="row">
+                <a href="javascript:clear()" style="z-index: 1; color: #fff;" class="position-relative mx-auto ml-sm-5">
+                <div class="col-auto pt-3 pb-1" id="site-link" style="background-size: cover; background: url();">
+                    <div class="header-background position-absolute" style="background-color: #000; top: 0; left: 0; right: 0; bottom: 0; z-index: 0;"></div>
+                    <h3 class="position-relative" style="z-index: 1;">bingo</h3>
+                </div>
+                </a>
+            </div>
+            <div class="row mb-3 justify-content-center d-none">
+                <h1 style="color: red">No text provided</h1>
+            </div>
+            <div class="row pt-5 justify-content-center">
+                <div class="col-auto">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>B</td>
+                                <td>I</td>
+                                <td>N</td>
+                                <td>G</td>
+                                <td>O</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td>
+                                    <strong>FREE</strong>
+                                    <span class="free"></span>
+                                    <strong>SPACE</strong>
+                                </td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row only-if-valid justify-content-center align-items-end">
+                <div class="col-auto">
+                    <a href="javascript:gen(newSeed())" title="New Seed"><i class="fas fa-redo-alt fa-3x rotate" style="margin: 60px 0 0 0;"></i></a>
+                </div>
+                <div class="col-auto ml-5" id="showurl">
+                    <a href="javascript:toggleURL()" title="Share Seeded Board"><i class="fas fa-share-square fa-3x"></i></a>
+                </div>
+                <div class="w-100"></div>
+                <div class="col-auto text-muted hidden" style="margin-top: 60px;" id="url">
+                    <h4>
+                        <a href="javascript:toggleURL()" title="Hide URL"><i class="fas fa-times"></i></a>
+                        <input readonly/>
+                        <a href="javascript:copyURL()" title="Copy URL"><i class="far fa-copy"></i></a>
+                    </h4>
+                </div>
+            </div>
+            <div class="row justify-content-center text-muted footer my-3" style="font-size: 1.5em;">
+                <div class="col-auto">
+                    <a href="https://gitlab.com/crunchyintheory/bingo/blob/master/LICENSE" target="_blank" rel="noopener">
+                        <i class="far fa-copyright"></i>
+                        <span style="vertical-align: text-top">2019</span>
+                    </a>
+                </div>
+                <div class="col-auto ml-3">
+                    <a href="https://gitlab.com/crunchyintheory/bingo" target="_blank" rel="noopener">
+                        <i class="fab fa-gitlab"></i>&nbsp;crunchyintheory
+                    </a>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
