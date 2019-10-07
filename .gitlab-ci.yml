@@ -1,0 +1,10 @@
+package:
+  image: node:dubnium
+  stage: deploy
+  before_script: 
+   - npm i -g minify
+  script: 
+   - for file in *.js; do minify $file > ${file/.js/.min.js}; find ./*.html -type f -exec sed -i -e "s/$file/${file/.js/.min.js}/g" {} \;; done
+  artifacts:
+    paths:
+      - /
