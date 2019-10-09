@@ -17,16 +17,22 @@ function updateCard() {
         tiles.push($(this).val());
     });
 
+    $('tbody td span').each(function() {
+        $(this).text('');
+    });
+
     let i = 0;
     if(freeSpaceEnabled) {
         $('tbody td:not(.free) span').each(function() {
-            $(this).text(tiles[i++]);
+            $(this).text(tiles[i]);
+            $(this).parent().attr('index', i++);
         });
         $('tbody td.free span').text($('.space.free-space textarea').val());
         $('tbody td.free strong').removeClass('d-none');
     } else {
         $('tbody td span').each(function() {
-            $(this).text(tiles[i++]);
+            $(this).text(tiles[i]);
+            $(this).parent().attr('index', i++);
         });
         $('tbody td.free strong').addClass('d-none');
     }
@@ -42,14 +48,50 @@ function toggleFreeSpace(force = null) {
     updateCard();
 }
 
-function addSection(context) {
+function addSection(context, skipUpdate = false, text = null) {
     const clone = editorSectionTemplate.content.cloneNode(true);
+    
+    if(text !== null) {
+        clone.querySelector('textarea').value = text;
+    }
+    
     context.parentNode.insertBefore(clone, context.nextSibling);
-    updateCard();
+    if(!skipUpdate) {
+        updateCard();
+    }
 }
 
 function removeSection(context) {
     context.remove();
+}
+
+function toggleImport() {
+    $('#importWrapper').toggleClass('d-none');
+    $('.space').toggleClass('d-none');
+}
+
+function runImport() {
+    const text = $('textarea#import').val();
+    const arr = text.split('\n').slice(0, 25);
+    
+    $('#cb2')[0].checked = arr.length < 25;
+    toggleFreeSpace(arr.length < 25);
+    const start = $('.space:nth-child(3)');
+    let next;
+    while((next = start.next()).length) {
+        next.remove();
+    }
+
+    next = start;
+    for(let i = 0; i < arr.length; i++) {
+        addSection(next[0], true, arr[i]);
+        next = next.next();
+        next.addClass('d-none');
+    }
+
+    start.remove();
+
+    updateCard();
 }
 
 jQuery(function($) {
@@ -58,6 +100,12 @@ jQuery(function($) {
     editorSectionTemplate = document.querySelector('template#editorSection');
 
     $('tbody td').click(function() {
-        
+        if(freeSpaceEnabled && $(this).is('.free')) {
+            $('.space.free-space textarea')[0].focus();
+        }
+        const textareas = $('.space textarea');
+        if(textareas.length - 1 > +$(this).attr('index')) {
+            textareas[+$(this).attr('index') + 1].focus();
+        }
     })
 });

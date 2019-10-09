@@ -132,6 +132,7 @@
             input[type="text"][disabled], textarea[disabled] {
                 color: #777;
                 border-color: #777;
+                background-color: #232323;
             }
 
             /* https://codepen.io/mallendeo/pen/eLIiG */
@@ -214,9 +215,27 @@
                 cursor: pointer;
             }
 
-            .row.space:nth-child(2):last-child .fa-minus {
+            .row.space:nth-child(3):last-child .fa-minus {
                 color: #555;
                 pointer-events: none;
+            }
+
+            .version-flag {
+                position: absolute;
+                right: 0;
+                width: 100%;
+                background: #d43;
+                text-align: left;
+                text-transform: uppercase;
+                color: #fff;
+                font-weight: 600;
+                bottom: -24px;
+                text-orientation: upright;
+                transform: rotate(-90deg) translatey(256%) translatex(62%);
+                width: 62px;
+                box-sizing: content-box;
+                padding-right: 32px;
+                padding-left: 5px;
             }
         </style>
     </head>
@@ -237,13 +256,14 @@
                     <div class="col-auto pt-3 pb-1" id="site-link" style="background-size: cover; background: url();">
                         <div class="header-background position-absolute" style="background-color: #fff; top: 0; left: 0; right: 0; bottom: 0; z-index: 0;"></div>
                         <h3 class="position-relative" style="z-index: 1;">bingo</h3>
+                        <div class="version-flag">Beta</div>
                     </div>
                 </a>
                 <div class="col-auto mt-3">
-                    <a href="javascript:import()" title="Import"><i class="fas fa-file-import fa-2x"></i></a>
+                    <a href="javascript:toggleImport()" title="Import"><i class="fas fa-file-import fa-2x"></i></a>
                 </div>
                 <div class="col-auto mt-3 ml-5" id="showurl">
-                    <a href="javascript:toggleURL()" title="Share Seeded Board"><i class="fas fa-share-square fa-2x"></i></a>
+                    <a href="javascript:toggleURL()" title="Share Board"><i class="fas fa-share-square fa-2x"></i></a>
                 </div>
                 <div class="col-auto text-muted hidden mt-3" id="url">
                     <h4>
@@ -255,6 +275,21 @@
             </div>
             <div class="row pt-5">
                 <div class="col-md-3 ml-5">
+                    <div class="row pb-3 d-none align-items-center" id="importWrapper">
+                        <div class="col-auto">
+                            <a href="javascript:toggleImport()"><i class="fas fa-times"></i></a>
+                        </div>
+                        <div class="col-auto">
+                            <h3>Import</h3>
+                        </div>
+                        <div class="col-12 mt-5 mb-2">
+                            <label for="import">Each line corresponds to one space.</label>
+                            <textarea id="import" name="import"></textarea>
+                        </div>
+                        <div class="col-auto ml-auto">
+                            <button type="button" class="btn btn-light" onclick="runImport()">Import</button>
+                        </div>
+                    </div>
                     <div class="row pb-3 space free-space">
                         <h3 class="col-auto">Free Space</h3>
                         <div class="col">
