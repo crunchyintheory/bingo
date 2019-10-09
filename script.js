@@ -58,8 +58,9 @@ jQuery(function($) {
         }
         gen(seed);
     } else {
-        
-        $('#no-text').removeClass('d-none');
+        if(!searchParams.has('noRedirect')) {
+            $('a[href=editor]').click();
+        }
         $('.row.only-if-valid').remove();
     }
     $('tbody td').click(function() {

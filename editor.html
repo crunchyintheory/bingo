@@ -252,20 +252,22 @@
     <body>
         <div class="container-fluid d-flex flex-column pb-3">
             <div class="row">
-                <a href=".." style="z-index: 1; color: #000;" class="position-relative mr-5 ml-sm-5">
+                <a href=".?noRedirect" style="z-index: 1; color: #000;" class="position-relative mx-md-5 mx-auto">
                     <div class="col-auto pt-3 pb-1" id="site-link" style="background-size: cover; background: url();">
                         <div class="header-background position-absolute" style="background-color: #fff; top: 0; left: 0; right: 0; bottom: 0; z-index: 0;"></div>
                         <h3 class="position-relative" style="z-index: 1;">bingo</h3>
                         <div class="version-flag">Beta</div>
                     </div>
                 </a>
-                <div class="col-auto mt-3">
+                <div class="w-100 d-block d-md-none"></div>
+                <div class="col-auto mt-3 ml-auto ml-md-0">
                     <a href="javascript:toggleImport()" title="Import"><i class="fas fa-file-import fa-2x"></i></a>
                 </div>
-                <div class="col-auto mt-3 ml-5" id="showurl">
+                <div class="col-auto mt-3 ml-5 mr-auto mr-md-0" id="showurl">
                     <a href="javascript:toggleURL()" title="Share Board"><i class="fas fa-share-square fa-2x"></i></a>
                 </div>
-                <div class="col-auto text-muted hidden mt-3" id="url">
+                <div class="w-100 d-block d-md-none"></div>
+                <div class="col-auto text-muted hidden mt-3 mx-auto mx-md-0" id="url">
                     <h4>
                         <a href="javascript:toggleURL()" title="Hide URL"><i class="fas fa-times"></i></a>
                         <input type="text" class="small" readonly/>
