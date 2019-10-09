@@ -8,7 +8,7 @@
         <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
 
         <style type="text/css">
-        body {
+            body {
                 background: #eee;
                 color: #444;
             }
@@ -94,6 +94,9 @@
                 height: 200px;
                 cursor: pointer;
             }
+            tbody td span {
+                word-wrap: break-word;
+            }
             strong {
                 color: limegreen;
                 display: block;
@@ -127,7 +130,7 @@
                 </div>
                 </a>
             </div>
-            <div class="row mb-3 justify-content-center d-none">
+            <div class="row mb-3 justify-content-center d-none" id="no-text">
                 <h1 style="color: red">No text provided</h1>
             </div>
             <div class="row pt-5 justify-content-center">

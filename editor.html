@@ -1,0 +1,349 @@
+<html lang="en">
+    <head>
+        <title>Bingo - Editor</title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+        <style type="text/css">
+            body {
+                background: #333;
+                color: #eee;
+            }
+
+            h1 {
+                text-align: center;
+                font-size: 4rem;
+            }
+
+            @media(max-width: 576px) {
+                h1 {
+                    font-size: 11vw;
+                }
+            }
+
+            a, .weak {
+                color: #bbb;
+            }
+
+            a:hover {
+                color: #eee;
+                text-decoration: none;
+            }
+
+            a i {
+                transition: transform 0.1s;
+                vertical-align: baseline;
+            }
+
+            a:hover i.rotate {
+                transform: rotate(40deg);
+            }
+
+            .hidden {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            #url > h4 > a {
+                margin: 0 15px;
+            }
+
+            .footer i {
+                vertical-align: middle;
+            }
+
+            .header-background {
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+            }
+
+            #site-link {
+                transition: margin 0.4s, padding 0.4s;
+            }
+
+            @media (min-width: 576px) {
+                #site-link:hover {
+                    padding-top: 3rem!important;
+                    margin-bottom: -2rem!important;
+                }
+            }
+            table {
+                border-spacing: 0;
+                text-align: center;
+                width: 1000px;
+                table-layout: fixed;
+                background: #222;
+            }
+            thead {
+                font-weight: 700;
+                font-size: 2em;
+            }
+            tbody {
+                font-size: 1.5em;
+            }
+            td {
+                border: 1px solid #eee;
+                padding: 10px;
+            }
+            tbody td {
+                height: 200px;
+            }
+            tbody td span {
+                word-wrap: break-word;
+            }
+            strong {
+                color: limegreen;
+                display: block;
+                margin: 5px;
+            }
+            strong:first-child {
+                border-bottom: 1px solid limegreen;
+                padding-bottom: 2px;
+            }
+            strong:last-child {
+                border-top: 1px solid limegreen;
+                padding-top: 2px;
+            }
+            td.done {
+                color: #fff;
+                font-weight: 700;
+                background: firebrick;
+            }
+            table + span, table + span a {
+                color: darkgray !important;
+            }
+
+            input[type="text"], textarea {
+                color: #eee;
+                background: #222;
+                border: 1px solid #eee;
+            }
+
+            input[type="text"]:not(.small), textarea {
+                font-size: 1.2em;
+                padding: 8px;
+                width: 100%;
+            }
+
+            input[type="text"][disabled], textarea[disabled] {
+                color: #777;
+                border-color: #777;
+            }
+
+            /* https://codepen.io/mallendeo/pen/eLIiG */
+            .tgl {
+              display: none;
+            }
+            .tgl, .tgl:after, .tgl:before, .tgl *, .tgl *:after, .tgl *:before, .tgl + .tgl-btn {
+              box-sizing: border-box;
+            }
+            .tgl::-moz-selection, .tgl:after::-moz-selection, .tgl:before::-moz-selection, .tgl *::-moz-selection, .tgl *:after::-moz-selection, .tgl *:before::-moz-selection, .tgl + .tgl-btn::-moz-selection {
+              background: none;
+            }
+            .tgl::selection, .tgl:after::selection, .tgl:before::selection, .tgl *::selection, .tgl *:after::selection, .tgl *:before::selection, .tgl + .tgl-btn::selection {
+              background: none;
+            }
+            .tgl + .tgl-btn {
+              outline: 0;
+              display: block;
+              width: 4em;
+              height: 2em;
+              position: relative;
+              cursor: pointer;
+              -webkit-user-select: none;
+                 -moz-user-select: none;
+                  -ms-user-select: none;
+                      user-select: none;
+            }
+            .tgl + .tgl-btn:after, .tgl + .tgl-btn:before {
+              position: relative;
+              display: block;
+              content: "";
+              width: 50%;
+              height: 100%;
+            }
+            .tgl + .tgl-btn:after {
+              left: 0;
+            }
+            .tgl + .tgl-btn:before {
+              display: none;
+            }
+            .tgl:checked + .tgl-btn:after {
+              left: 50%;
+            }
+
+            .tgl-ios + .tgl-btn {
+              background: #444;
+              border-radius: 2em;
+              padding: 2px;
+              transition: all .4s ease;
+              border: 1px solid #222;
+            }
+            .tgl-ios + .tgl-btn:after {
+              border-radius: 2em;
+              background: #eee;
+              transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s ease, margin 0.3s ease;
+              box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 4px 0 rgba(0, 0, 0, 0.08);
+            }
+            .tgl-ios + .tgl-btn:hover:after {
+              will-change: padding;
+            }
+            .tgl-ios + .tgl-btn:active {
+              box-shadow: inset 0 0 0 2em #000;
+            }
+            .tgl-ios + .tgl-btn:active:after {
+              padding-right: .8em;
+            }
+            .tgl-ios:checked + .tgl-btn {
+              background: limegreen;
+            }
+            .tgl-ios:checked + .tgl-btn:active {
+              box-shadow: none;
+            }
+            .tgl-ios:checked + .tgl-btn:active:after {
+              margin-left: -.8em;
+            }
+
+            /* end codepen */
+
+            .row.space i {
+                cursor: pointer;
+            }
+
+            .row.space:nth-child(2):last-child .fa-minus {
+                color: #555;
+                pointer-events: none;
+            }
+        </style>
+    </head>
+    <template id="editorSection">
+        <div class="row py-3 align-items-center space" style="border-top: 1px solid #eee">
+            <div class="col-md-1 ml-2" style="font-size: 1.5em">
+                <i class="fa fa-plus" onclick="addSection(this.parentElement.parentElement)"></i>
+                <i class="fa fa-minus" onclick="removeSection(this.parentElement.parentElement)" style="margin-top: 10px;"></i>
+            </div>
+            <div class="col"></div>
+            <div class="col-md-10"><textarea oninput="updateCard()" placeholder="Text"></textarea></div>
+        </div>
+    </template>
+    <body>
+        <div class="container-fluid d-flex flex-column pb-3">
+            <div class="row">
+                <a href=".." style="z-index: 1; color: #000;" class="position-relative mr-5 ml-sm-5">
+                    <div class="col-auto pt-3 pb-1" id="site-link" style="background-size: cover; background: url();">
+                        <div class="header-background position-absolute" style="background-color: #fff; top: 0; left: 0; right: 0; bottom: 0; z-index: 0;"></div>
+                        <h3 class="position-relative" style="z-index: 1;">bingo</h3>
+                    </div>
+                </a>
+                <div class="col-auto mt-3">
+                    <a href="javascript:import()" title="Import"><i class="fas fa-file-import fa-2x"></i></a>
+                </div>
+                <div class="col-auto mt-3 ml-5" id="showurl">
+                    <a href="javascript:toggleURL()" title="Share Seeded Board"><i class="fas fa-share-square fa-2x"></i></a>
+                </div>
+                <div class="col-auto text-muted hidden mt-3" id="url">
+                    <h4>
+                        <a href="javascript:toggleURL()" title="Hide URL"><i class="fas fa-times"></i></a>
+                        <input type="text" class="small" readonly/>
+                        <a href="javascript:copyURL()" title="Copy URL"><i class="far fa-copy"></i></a>
+                    </h4>
+                </div>
+            </div>
+            <div class="row pt-5">
+                <div class="col-md-3 ml-5">
+                    <div class="row pb-3 space free-space">
+                        <h3 class="col-auto">Free Space</h3>
+                        <div class="col">
+                            <input class="tgl tgl-ios" id="cb2" type="checkbox" onchange="toggleFreeSpace()"/>
+                            <label class="tgl-btn" for="cb2"></label>
+                        </div>
+                        <div class="w-100 my-1"></div>
+                        <div class="col"><textarea oninput="updateCard()" placeholder="Text"></textarea></div>
+                    </div>
+                    <div class="row py-3 align-items-center space" style="border-top: 1px solid #eee">
+                        <div class="col-md-1 ml-2" style="font-size: 1.5em">
+                            <i class="fa fa-plus" onclick="addSection(this.parentElement.parentElement)"></i>
+                            <i class="fa fa-minus" onclick="removeSection(this.parentElement.parentElement)" style="margin-top: 10px;"></i>
+                        </div>
+                        <div class="col"></div>
+                        <div class="col-md-10"><textarea oninput="updateCard()" placeholder="Text"></textarea></div>
+                    </div>
+                </div>
+                <div class="col"></div>
+                <div class="col-7">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>B</td>
+                                <td>I</td>
+                                <td>N</td>
+                                <td>G</td>
+                                <td>O</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td class="free">
+                                    <strong>FREE</strong>
+                                    <span></span>
+                                    <strong>SPACE</strong>
+                                </td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                            </tr>
+                            <tr>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row justify-content-center text-muted footer my-3" style="font-size: 1.5em;">
+                <div class="col-auto">
+                    <a href="https://gitlab.com/crunchyintheory/bingo/blob/master/LICENSE" target="_blank" rel="noopener">
+                        <i class="far fa-copyright"></i>
+                        <span style="vertical-align: text-top">2019</span>
+                    </a>
+                </div>
+                <div class="col-auto ml-3">
+                    <a href="https://gitlab.com/crunchyintheory/bingo" target="_blank" rel="noopener">
+                        <i class="fab fa-gitlab"></i>&nbsp;crunchyintheory
+                    </a>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="editor.js"></script>
+    </body>
+</html>

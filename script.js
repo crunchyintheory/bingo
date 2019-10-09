@@ -58,7 +58,8 @@ jQuery(function($) {
         }
         gen(seed);
     } else {
-        $('.d-none').removeClass('d-none');
+        
+        $('#no-text').removeClass('d-none');
         $('.row.only-if-valid').remove();
     }
     $('tbody td').click(function() {
