@@ -7,4 +7,4 @@ package:
    - for file in *.js; do minify $file > ${file/.js/.min.js}; find ./*.html -type f -exec sed -i -e "s/$file/${file/.js/.min.js}/g" {} \;; done
   artifacts:
     paths:
-      - /
+      - $CI_BUILDS_DIR
